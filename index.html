@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Александр Субботин | Резюме с вкладками</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #eef2f6;
+            color: #1a2c3e;
+            padding: 2rem 1rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* --- ШАПКА --- */
+        .profile-header {
+            background: linear-gradient(145deg, #0a2b3a, #1a4f66);
+            color: white;
+            padding: 2rem 2.5rem;
+            position: relative;
+        }
+
+        .name-title h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .name-title p {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            border-left: 3px solid #6baec9;
+            padding-left: 1rem;
+            margin-top: 0.4rem;
+        }
+
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 0.9rem 1.2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(2px);
+            font-size: 0.9rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item strong {
+            opacity: 0.9;
+        }
+
+        .badge {
+            background: #f5b342;
+            color: #1e2f3a;
+            padding: 0.15rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        /* --- КНОПКА WHATSAPP --- */
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: #25d366;
+            color: white;
+            padding: 0.7rem 1.6rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            margin-top: 0.5rem;
+        }
+
+        .whatsapp-btn:hover {
+            background: #1ebe5d;
+            transform: scale(1.03);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+        }
+
+        .whatsapp-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+            flex-shrink: 0;
+        }
+
+        .header-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        /* --- ВКЛАДКИ --- */
+        .tabs-wrapper {
+            padding: 0 2rem 2rem 2rem;
+        }
+
+        .tabs-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            border-bottom: 2px solid #dce8ef;
+            padding-bottom: 0.2rem;
+            margin-bottom: 1.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 0.7rem 1.4rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #4a667a;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .tab-btn:hover {
+            background: #eaf1f6;
+            color: #0b4f6c;
+        }
+
+        .tab-btn.active {
+            background: #1a4f66;
+            color: white;
+            box-shadow: 0 4px 10px rgba(26, 79, 102, 0.2);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fade 0.25s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fade {
+            0% { opacity: 0.3; transform: translateY(6px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- ОБЩИЕ СТИЛИ --- */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: #0b4f6c;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 5px;
+            height: 26px;
+            background: #2c8cae;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: #f7fbfd;
+            padding: 1rem 1.2rem;
+            border-radius: 18px;
+        }
+
+        .timeline-item {
+            margin-bottom: 1.4rem;
+            padding-left: 1rem;
+            border-left: 3px solid #7ab3c8;
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: #2c8cae;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .timeline-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin: 0.2rem 0 0.1rem;
+        }
+
+        .timeline-sub {
+            font-size: 0.9rem;
+            color: #4a6272;
+        }
+
+        .desc-list {
+            padding-left: 1.2rem;
+            margin-top: 0.3rem;
+        }
+
+        .desc-list li {
+            margin-bottom: 0.2rem;
+            font-size: 0.9rem;
+        }
+
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 0.7rem;
+            margin-top: 0.5rem;
+        }
+
+        .equip-card {
+            background: #eef5f9;
+            padding: 0.6rem 1rem;
+            border-radius: 14px;
+            font-size: 0.85rem;
+        }
+
+        .project-block {
+            background: #fefaf0;
+            padding: 0.9rem 1.2rem;
+            border-radius: 18px;
+            margin-bottom: 0.8rem;
+        }
+
+        .lang-sport {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 0.8rem;
+        }
+
+        hr {
+            margin: 1.2rem 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #cbdde5, transparent);
+        }
+
+        .inline-highlight {
+            background: #e4eef5;
+            padding: 0.1rem 0.4rem;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        footer {
+            background: #eaf1f6;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.8rem;
+            color: #4a6272;
+        }
+
+        /* ФИКСИРОВАННАЯ КНОПКА WHATSAPP (мобильная плашка) */
+        .whatsapp-fixed {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #25d366;
+            color: white;
+            border-radius: 60px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 8px 28px rgba(37, 211, 102, 0.45);
+            z-index: 999;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            transition: all 0.3s;
+        }
+
+        .whatsapp-fixed:hover {
+            transform: scale(1.05);
+            background: #1ebe5d;
+        }
+
+        .whatsapp-fixed svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+
+        .whatsapp-fixed .label {
+            display: inline-block;
+        }
+
+        @media (max-width: 600px) {
+            .whatsapp-fixed .label {
+                display: none;
+            }
+            .whatsapp-fixed {
+                padding: 14px;
+                border-radius: 50px;
+                bottom: 16px;
+                right: 16px;
+            }
+            .profile-header { padding: 1.5rem; }
+            .tabs-wrapper { padding: 0 1rem 1.5rem 1rem; }
+            .tab-btn { padding: 0.5rem 1rem; font-size: 0.85rem; }
+            .name-title h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ШАПКА -->
+    <div class="profile-header">
+        <div class="name-title">
+            <h1>Субботин Александр Владимирович</h1>
+            <p>Инженер химик-технолог | Эксперт GMP | Директор департамента инфраструктуры</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-item"><strong>📅 Родился:</strong> 17.06.1977</div>
+            <div class="contact-item"><strong>👪 Семья:</strong> Женат, двое детей</div>
+            <div class="contact-item"><strong>🌍 Гражданство:</strong> Казахстан</div>
+            <div class="contact-item"><strong>🏠 Города:</strong> Алматы, Шымкент</div>
+            <div class="contact-item"><strong>📞 Телефон:</strong> +7 777 4933579 <span class="badge">09:00–18:00</span></div>
+        </div>
+        <!-- КНОПКА WHATSAPP В ШАПКЕ -->
+        <div class="header-actions">
+            <a href="https://wa.me/77774933579?text=Здравствуйте%2C%20Александр%20Владимирович!%20Я%20по%20поводу%20вашего%20резюме." target="_blank" class="whatsapp-btn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                <span>Написать в WhatsApp</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ВКЛАДКИ -->
+    <div class="tabs-wrapper">
+        <div class="tabs-nav">
+            <button class="tab-btn active" data-tab="tab1">🧑‍💼 Опыт</button>
+            <button class="tab-btn" data-tab="tab2">🎓 Образование</button>
+            <button class="tab-btn" data-tab="tab3">🔧 Проекты</button>
+            <button class="tab-btn" data-tab="tab4">📊 Оборудование</button>
+            <button class="tab-btn" data-tab="tab5">📚 Тренинги</button>
+            <button class="tab-btn" data-tab="tab6">🌐 Языки & Контакты</button>
+        </div>
+
+        <!-- ВКЛАДКА 1 — ОПЫТ -->
+        <div id="tab1" class="tab-content active">
+            <div class="section-title">Профессиональный опыт</div>
+            <div class="two-columns">
+                <div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">01.2019 – 04.2025</div>
+                        <div class="timeline-title">АО «Химфарм» — Директор департамента инфраструктуры</div>
+                        <div class="timeline-sub">105 чел. в подчинении, Алматы</div>
+                        <ul class="desc-list">
+                            <li>Инженерный отдел, техобслуживание, автоматизация, энергоснабжение, мехцех.</li>
+                            <li>Капитальное строительство, модернизация, сериализация, подготовка к EU GMP.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">09.2015 – 12.2018</div>
+                        <div class="timeline-title">ТОО «НУР-МАЙ ФАРМАЦИЯ» — Зам. ген. директора по технике</div>
+                        <ul class="desc-list"><li>Управление техслужбой, производство инфузионных растворов.</li></ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">10.2004 – 04.2008</div>
+                        <div class="timeline-title">АО «НУР-МАЙ» — Главный технолог завода «AYAT pharm»</div>
+                        <ul class="desc-list"><li>Строительство и пуск GMP-завода, FAT в Германии и Италии, регламенты.</li></ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">11.2025 – 04.2026</div>
+                        <div class="timeline-title">ТОО «Электрокомплект-1» — Главный инженер</div>
+                        <ul class="desc-list"><li>Ремонты, модернизация, строительство кабельного цеха.</li></ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">09.2013 – 09.2015</div>
+                        <div class="timeline-title">ТОО «НУР-МАЙ ФАРМАЦИЯ» — Инженер-технолог</div>
+                        <ul class="desc-list"><li>Бесперебойность производства инфузионных растворов.</li></ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2000–2003</div>
+                        <div class="timeline-title">ТОО «Стандартойл» / «Аналит» — Специалист по качеству</div>
+                        <ul class="desc-list"><li>Анализ нефтепродуктов, сертификация, методики.</li></ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">1997–1999</div>
+                        <div class="timeline-title">ИХН АН РК — Химик-лаборант, стажёр-исследователь</div>
+                        <ul class="desc-list"><li>Хроматография, ЯМР, ИК-спектроскопия.</li></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ВКЛАДКА 2 — ОБРАЗОВАНИЕ -->
+        <div id="tab2" class="tab-content">
+            <div class="section-title">Образование</div>
+            <div class="two-columns">
+                <div class="info-card">
+                    <p><strong>🎓 КазНТУ им. К. Сатпаева</strong> (1994–1999)<br>Факультет химической технологии и полиграфии<br>Специализация: Химическая технология полимеров<br><span class="inline-highlight">Инженер химик-технолог</span></p>
+                    <p style="margin-top: 0.8rem;"><strong>📖 Стажер-исследователь</strong> (1999–2000)<br>КазНТУ, инженер химик-технолог</p>
+                </div>
+                <div class="info-card">
+                    <p><strong>🏅 Дополнительное обучение:</strong></p>
+                    <ul class="desc-list">
+                        <li>GMP (ЕС, Германия, Украина)</li>
+                        <li>Промышленная безопасность (РК)</li>
+                        <li>Программирование Siemens (Festo)</li>
+                        <li>Управление проектами, Lean, BPMN</li>
+                        <li>ISPE техническое обслуживание</li>
+                        <li>EU GMP Приложение 1, риск-подход</li>
+                    </ul>
+                    <p style="margin-top: 0.6rem;"><span class="inline-highlight">Более 25 курсов</span> (2000–2024)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ВКЛАДКА 3 — ПРОЕКТЫ -->
+        <div id="tab3" class="tab-content">
+            <div class="section-title">Ключевые проекты</div>
+            <div class="project-block"><strong>🏭 Завод «AYAT pharm» (2004–2006)</strong> — Проектирование, FAT в Германии/Италии, монтаж, пусконаладка, выпуск продукции.</div>
+            <div class="project-block"><strong>⚙️ Модернизация АО «Химфарм» (2019–2025)</strong> — Сериализация (таблеточный/ампульный цеха), лаборатория R&D, Korsch 300/400, Syntigon, чиллеры, котельная, участки коутирования.</div>
+            <div class="project-block"><strong>🧪 Научные проекты</strong> — «Синтез диоксинов», анализ экстрактов флоры Казахстана, исследование полистирола, ЯМР/ИК-спектроскопия.</div>
+            <div class="project-block"><strong>🏗️ Подготовка к EU GMP</strong> — Таблеточный цех: вентиляция, мониторинг, риск-ориентированный подход.</div>
+            <div class="project-block"><strong>📦 Реконструкция складов, GMP-зоны (2014–2015)</strong> — Прачечная для чистых помещений, комнаты отбора проб, склады ЗИП.</div>
+        </div>
+
+        <!-- ВКЛАДКА 4 — ОБОРУДОВАНИЕ -->
+        <div id="tab4" class="tab-content">
+            <div class="section-title">Оборудование и компетенции</div>
+            <div class="equipment-grid">
+                <div class="equip-card">Газовые / жидкостные хроматографы</div>
+                <div class="equip-card">ЯМР, ИК-спектрометр, УФ-спектрометр, флюориметр</div>
+                <div class="equip-card">Анализаторы нефти: ПОСТ-2Мк, АРН-2, АРНЭ, ЛАЗ-93, УИТ-85</div>
+                <div class="equip-card">Экструдеры, каландры, литьевые машины</div>
+                <div class="equip-card">Установки WFI, чистая пар, автоклавы, BFS-линии</div>
+                <div class="equip-card">Машины полипропиленовых контейнеров (Plumat, Германия)</div>
+                <div class="equip-card">Линии наполнения и упаковки (Sudmo, Packmittel)</div>
+                <div class="equip-card">Таблетпрессы Korsch 300/400, ампульные Syntigon</div>
+                <div class="equip-card">Блистерные / картонажные машины (IWK, Farcon, МА-80)</div>
+                <div class="equip-card">Системы автоматизации Siemens, HVAC, чиллеры, компрессоры</div>
+                <div class="equip-card">Системы мониторинга, калибровка, ЧПУ-станки</div>
+            </div>
+            <p style="margin-top: 1rem;"><span class="inline-highlight">✔ Опыт эксплуатации, ремонта, квалификации и валидации</span></p>
+        </div>
+
+        <!-- ВКЛАДКА 5 — ТРЕНИНГИ -->
+        <div id="tab5" class="tab-content">
+            <div class="section-title">Повышение квалификации</div>
+            <div class="two-columns">
+                <ul class="desc-list">
+                    <li>🧪 1997–1999 — ИХН АН РК: современные методики анализа, ремонт техники</li>
+                    <li>🛢️ 2004 — Правила безопасности газового хозяйства РК, сосуды под давлением</li>
+                    <li>💊 2005 — Стажировка «Фарматрейд» (Украина): технология инфузионных растворов</li>
+                    <li>📋 2005 — Курсы Минздрава Украины: GMP, экономика фармации, стерилизация</li>
+                    <li>📊 2010 — Менеджмент качества (АНО «Статус»)</li>
+                    <li>📐 2017 — Основы управления проектами (Антал Консалтинг)</li>
+                    <li>🛡️ 2019, 2020, 2023 — Промбезопасность (Байтау Партнерс)</li>
+                </ul>
+                <ul class="desc-list">
+                    <li>⚙️ 2015 — Программирование Siemens (Festo)</li>
+                    <li>📈 2020 — BPMN 2.0 (l-a-b-a.com)</li>
+                    <li>🧬 2020–2024 — EU GMP, Приложение 1, управление изменениями, вода фармкачества, ОВиКВ (Фармстратегия)</li>
+                    <li>⏳ 2024 — Time management (Advance community)</li>
+                    <li>⚖️ 2024 — Трудовые споры (Корп. Бизнес Школа)</li>
+                    <li>🧠 2023 — Quality mindset (PQE)</li>
+                    <li>📌 2023 — Lean технологии (Kaizen center)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ВКЛАДКА 6 — ЯЗЫКИ И КОНТАКТЫ -->
+        <div id="tab6" class="tab-content">
+            <div class="section-title">Языки & Личное</div>
+            <div class="lang-sport">
+                <div><strong>🗣 Языки (1–5):</strong><br>Русский – 5<br>Английский – 4<br>Немецкий – 4<br>Казахский – 3</div>
+                <div><strong>🏆 Спорт:</strong><br>🎾 Теннис (professional)<br>🏓 Настольный теннис (solid amateur)<br>♟ Шахматы (solid amateur)</div>
+                <div><strong>📌 Дополнительно:</strong><br>Член ПДЭК, сертифицированный GMP-эксперт, опыт FAT/SAT в ЕС.</div>
+            </div>
+            <hr>
+            <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between;">
+                <div><strong>📞 Телефон:</strong> +7 777 4933579 (09:00–18:00)</div>
+                <div><strong>📍 Резиденция:</strong> Алматы / Шымкент</div>
+                <div><strong>✉️ Готовность к переезду/командировкам:</strong> высокая</div>
+            </div>
+            <hr>
+            <div class="info-card" style="background:#eaf4f8; margin-top: 0.8rem;">
+                <p>📅 Дата заполнения резюме: 08.04.2025</p>
+                <p style="margin-top: 0.3rem;">🔹 Опыт внедрения систем промышленной безопасности, подготовка к инспекциям регулирующих органов.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>© 2025 Субботин Александр Владимирович — Резюме инженера-химика-технолога, руководителя проектов</footer>
+</div>
+
+<!-- ФИКСИРОВАННАЯ КНОПКА WHATSAPP (всегда видна) -->
+<a href="https://wa.me/77774933579?text=Здравствуйте%2C%20Александр%20Владимирович!%20Я%20по%20поводу%20вашего%20резюме." target="_blank" class="whatsapp-fixed">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span class="label">WhatsApp</span>
+</a>
+
+<script>
+    (function() {
+        const tabs = document.querySelectorAll('.tab-btn');
+        const contents = document.querySelectorAll('.tab-content');
+
+        function activateTab(tabId) {
+            contents.forEach(c => c.classList.remove('active'));
+            tabs.forEach(b => b.classList.remove('active'));
+
+            const target = document.getElementById(tabId);
+            if (target) target.classList.add('active');
+
+            const activeBtn = Array.from(tabs).find(b => b.dataset.tab === tabId);
+            if (activeBtn) activeBtn.classList.add('active');
+        }
+
+        tabs.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const tabId = this.dataset.tab;
+                if (tabId) activateTab(tabId);
+            });
+        });
+
+        const firstActive = document.querySelector('.tab-btn.active');
+        if (firstActive) {
+            const id = firstActive.dataset.tab;
+            if (id) activateTab(id);
+        }
+    })();
+</script>
+
+</body>
+</html>
